@@ -1,6 +1,7 @@
 import numpy as np
 import os
 import time
+import sys
 
 NUM_COUNT = 100_000_000
 MAX_NUM = 99_999
@@ -15,7 +16,7 @@ def generate_with_numpy():
         for i in range(0, NUM_COUNT, CHUNK_SIZE):
             current_chunk_size = min(CHUNK_SIZE, NUM_COUNT - i)
             numbers = np.random.randint(0, MAX_NUM + 1, size=current_chunk_size, dtype=np.int32)
-            chunk_str = np.array2string(numbers, separator=', ')[1:-1].replace('\n', '')
+            chunk_str = np.array2string(numbers, separator=', ', threshold=sys.maxsize)[1:-1].replace('\n', '')
           
             if i == 0:
                 f.write(chunk_str)
