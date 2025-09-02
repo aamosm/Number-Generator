@@ -26,6 +26,6 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions-bot@github.com"
-          git add numbers.txt
+          git add -f numbers.txt
           git diff --staged --quiet || git commit -m "Generate and commit 100 million random numbers"
           git push
