@@ -20,7 +20,7 @@ jobs:
         run: pip install numpy
 
       - name: Generate random numbers file
-        run: python generate_numbers.py
+        run: python generate.py
 
       - name: Commit and push the data file via LFS
         run: |
