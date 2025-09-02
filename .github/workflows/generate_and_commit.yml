@@ -1,0 +1,31 @@
+name: Generate and Commit LFS Data File
+
+on:
+  workflow_dispatch: 
+
+jobs:
+  build-and-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install numpy
+
+      - name: Generate random numbers file
+        run: python generate_numbers.py
+
+      - name: Commit and push the data file via LFS
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions-bot@github.com"
+          git add numbers.txt
+          git diff --staged --quiet || git commit -m "Generate and commit 100 million random numbers"
+          git push
